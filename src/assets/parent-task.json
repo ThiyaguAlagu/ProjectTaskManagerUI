@@ -1,0 +1,14 @@
+{
+    "taskId": 1,
+    "taskName": "Parent Task2",
+    "parentId": 0,
+    "parent": null,
+    "startDate": "0001-01-01T00:00:00",
+    "endDate": "0001-01-01T00:00:00",
+    "priority": 0,
+    "status": false,
+    "projectId": null,
+    "userId": null,
+    "project": null,
+    "user": null
+  }

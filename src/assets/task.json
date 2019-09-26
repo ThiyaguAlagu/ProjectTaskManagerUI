@@ -1,0 +1,36 @@
+{
+  "taskId": 2,
+  "taskName": "Sabari Child Task1",
+  "parentId": 1,
+  "parent": {
+    "parentId": 1,
+    "parentTaskName": "Parent Task2"
+  },
+  "startDate": "2018-08-13T00:00:00",
+  "endDate": "2018-08-14T00:00:00",
+  "priority": 10,
+  "status": true,
+  "projectId": 2,
+  "userId": 2,
+  "project": {
+    "projectId": 2,
+    "projectName": "Project 3",
+    "startDate": "2018-08-12T00:00:00",
+    "endDate": "2018-08-13T00:00:00",
+    "priority": 18,
+    "managerId": 1,
+    "projectManager": null,
+    "status": "Active"
+  },
+  "user": {
+    "userId": 2,
+    "firstName": "Achinta",
+    "lastName": "Sarkar",
+    "employeeId": 123456,
+    "projectId": null,
+    "taskId": null,
+    "userProject": null,
+    "userTask": null,
+    "isDeleted": false
+  }
+}

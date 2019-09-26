@@ -1,0 +1,277 @@
+
+
+<h1 class="h2">{{formMode}}</h1>
+<div class="col-md-10">
+<form [formGroup]="addTaskForm" (ngSubmit)="addTaskSubmit()" *ngIf="loaded">
+        <div class="row" *ngIf="!isParentTask">
+                <div class="col-md-2"></div>
+                <div class="form-group col-md-8">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label" for="SelectedProjectName">Project:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" placeholder="Select Project" readonly name="SelectedProjectName" formControlName="SelectedProjectName">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchProjectsModal">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div *ngIf="(!addTaskForm.controls.SelectedProjectName.valid)">
+                        <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                        <p class="text-danger" style="display:inline;">This is a required field</p>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="TaskName">Task:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" id="TaskName" placeholder="Enter task name" formControlName="TaskName">
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <div *ngIf="(addTaskForm.controls.TaskName.touched && !addTaskForm.controls.TaskName.valid)">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">This is a required field</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-6">
+                <div class="checkbox checkbox-padding">
+                    <label>
+                        <input type="checkbox" name="IsParentTask" (change)="handleParentChange($event)" 
+                        formControlName="IsParentTask">Parent Task</label>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="row" *ngIf="!isParentTask">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-8">
+                    <div class="row">
+                            <div class="col-md-3">
+                                    <label class="control-label">Priority:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <h4 class="middleVert1">0</h4>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="middleVert1"></div>
+                                            <p-slider formControlName="Priority" [min]="0" [max]="30" [step]="1" [style]="{'width':'200px'}"></p-slider>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <h4 class="middleVert1">30</h4>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" readonly formControlName="PriorityDisplay" value="{{addTaskForm.controls.Priority.value}}">
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <div *ngIf="(addTaskForm.controls.Priority.touched && !addTaskForm.controls.Priority.valid)">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">This is a required field</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!isParentTask">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="ParentTask">Parent Task:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control text-left" style="min-width:50%" id="ParentTask" formControlName="ParentTask">
+                                <option [ngValue]=null>Select </option>
+                                <option *ngFor="let parent of parentTasks" [ngValue]="parent.parentId">
+                                    {{parent.parentTaskName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <div *ngIf="(addTaskForm.controls.ParentTask.touched && !addTaskForm.controls.ParentTask.valid)">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">This is a required field</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!isParentTask">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                                <label class="control-label" for="startDate">Start Date:</label>
+                        </div>
+                        <div class="col-md-8">
+                                <div class="input-group">
+                                    <p-calendar name="StartDate" formControlName="StartDate" [showIcon]="true"></p-calendar>
+                                </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <div *ngIf="(addTaskForm.controls.StartDate.touched && !addTaskForm.controls.StartDate.valid)">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">This is a required field</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!isParentTask">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-6">
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <label class="control-label" for="EndDate">End Date:</label>
+                            </div>
+                            <div class="col-md-8">
+                                    <div class="input-group">
+                                            <p-calendar name="EndDate" formControlName="EndDate" [showIcon]="true"></p-calendar>
+                                        </div>
+                            </div>
+                        </div>
+            </div>
+            <div class="col-md-3">
+
+                <div *ngIf="addTaskForm?.errors?.endDateLessThanStartDate">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">End date cannot be lower than start date.</p>
+                </div>
+                <div *ngIf="(addTaskForm.controls.EndDate.touched && !addTaskForm.controls.EndDate.valid)">
+                    <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                    <p class="text-danger" style="display:inline;">This is a required field</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!isParentTask">
+                <div class="col-md-2"></div>
+                <div class="form-group col-md-8">
+                        <div class="row">
+                                <div class="col-md-3">
+                                        <label class="control-label" for="SelectedUserName">User:</label>
+                                </div>
+                                <div class="col-md-5">
+                                        <input class="form-control" placeholder="Select User" readonly name="SelectedUserName" formControlName="SelectedUserName">
+                                </div>
+                                <div class="col-md-3">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchUsersModal">Search</button>
+                                </div>
+                            </div>
+                 </div>
+                <div class="col-md-2">
+                    <div *ngIf="(!addTaskForm.controls.SelectedUserName.valid)">
+                        <span class="glyphicon glyphicon-info-sign text-danger" aria-hidden="true" style="display:inline;"></span>
+                        <p class="text-danger" style="display:inline;">This is a required field</p>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="form-group col-md-6">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <button type="submit" class="btn btn-md btn-primary">{{btnMode}}</button>
+                    &nbsp;
+                    <button type="button" (click)="clearData()" class="btn btn-md btn-danger">Reset</button>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </form>
+</div>
+<div id="searchUsersModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Search Users</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <p-dataTable [value]="usersList">
+                            <p-column field="userId" header="User ID" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                            <p-column field="firstName" header="First Name" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                            <p-column field="lastName" header="Last Name" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                            <p-column field="employeeId" header="Employee ID" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                            <p-column>
+                                <ng-template let-user="rowData" pTemplate="body">
+                                    <button type="button" class="btn btn-success btn-sm" (click)="assignUser(user.userId, user.firstName + ' ' + user.lastName)"
+                                        data-dismiss="modal">Assign</button>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="searchProjectsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Search Projects</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <p-dataTable [value]="projectsList">
+                                <p-column field="projectName" header="Project Name" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                                <p-column field="startDate" header="Start Date" sortable="true" [filter]="true" filterMatchMode="contains">
+                                    <ng-template let-col let-project="rowData" let-ri="rowIndex" pTemplate="body">
+                                        <span>{{project[col.field]|date:'dd/MM/yyyy'}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="endDate" header="End Date" sortable="true" [filter]="true" filterMatchMode="contains">
+                                    <ng-template let-col let-project="rowData" let-ri="rowIndex" pTemplate="body">
+                                        <span>{{project[col.field]|date:'dd/MM/yyyy'}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="priority" header="Priority" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+                                <p-column>
+                                    <ng-template let-project="rowData" pTemplate="body">
+                                        <button type="button" class="btn btn-success btn-sm" (click)="assignProject(project.projectId, project.projectName)"
+                                            data-dismiss="modal">Assign</button>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

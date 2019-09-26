@@ -1,0 +1,47 @@
+<p-growl [(value)]="msgs" [life]="3000" [sticky]="false"></p-growl>
+
+<h1 class="h2">View Task</h1>
+
+<p-dataTable [value]="tasks" class="table table-striped table-sm">
+    <p-column  field="taskId" header="Task ID" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+    <p-column  field="taskName" header="Task Name" sortable="true" [filter]="true" filterMatchMode="contains"></p-column>
+    <p-column  field="parent.parentTaskName" header="Parent Task" sortable="true" [filter]="true" filterMatchMode="contains">
+        <ng-template let-col let-task="rowData" pTemplate="body">
+            <span>{{ task.parentId != 0 ? task.parent.parentTaskName : '-'}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="priority" header="Priority" sortable="true" [filter]="true" filterMatchMode="contains">
+        <ng-template let-col let-task="rowData" pTemplate="body">
+            <span>{{ task.parentId != 0 ? task.priority : '-'}}</span>
+        </ng-template>
+    </p-column >
+    <p-column field="startDate" header="Start Date" sortable="true" [filter]="true" filterMatchMode="contains">
+        <ng-template let-col let-task="rowData" let-ri="rowIndex" pTemplate="body">
+            <span *ngIf="task.parentId !=0">{{task[col.field]|date:'dd/MM/yyyy'}}</span>
+        </ng-template>
+    </p-column >
+    <p-column field="endDate" header="End Date" sortable="true" [filter]="true" filterMatchMode="contains"> 
+      <ng-template let-col let-task="rowData" let-ri="rowIndex" pTemplate="body">
+        <span *ngIf="task.parentId !=0" >{{ task[col.field]|date:'dd/MM/yyyy'}}</span>
+    </ng-template>
+  </p-column>
+  <p-column field="taskId"  [style]="{ 'width' : '25%' }">
+      <ng-template let-col let-task="rowData" pTemplate="body" >
+          
+          <div align="center">
+              <button type="button" class="btn btn-success btn-sm" (click)="editTask(task)"
+              [disabled]="!task.status && task.parentId!=0" >Edit</button>
+              &nbsp;
+              <button type="button" class="btn btn-warning btn-sm" (click)="endTask(task)"
+              [disabled]="!task.status">End Task</button>
+          </div>
+      </ng-template>
+  </p-column>
+</p-dataTable>   
+
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #confirmDialog ></p-confirmDialog>
+
+
+
+
+

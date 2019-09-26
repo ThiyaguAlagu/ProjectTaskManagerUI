@@ -1,0 +1,102 @@
+[
+    {
+      "projectId": 1,
+      "projectName": "Project1",
+      "startDate": "2018-08-12T00:00:00",
+      "endDate": "2018-08-13T00:00:00",
+      "priority": 10,
+      "managerId": 1,
+      "projectManager": {
+        "userId": 1,
+        "firstName": "Sabarinath",
+        "lastName": "Sivaprasad",
+        "employeeId": 259019,
+        "projectId": null,
+        "taskId": null,
+        "userProject": null,
+        "userTask": null,
+        "isDeleted": false
+      },
+      "status": "Active"
+    },
+    {
+      "projectId": 2,
+      "projectName": "Project 3",
+      "startDate": "2018-08-12T00:00:00",
+      "endDate": "2018-08-13T00:00:00",
+      "priority": 18,
+      "managerId": 1,
+      "projectManager": {
+        "userId": 1,
+        "firstName": "Sabarinath",
+        "lastName": "Sivaprasad",
+        "employeeId": 259019,
+        "projectId": null,
+        "taskId": null,
+        "userProject": null,
+        "userTask": null,
+        "isDeleted": false
+      },
+      "status": "Active"
+    },
+    {
+      "projectId": 3,
+      "projectName": "Project 2",
+      "startDate": "2018-08-12T00:00:00",
+      "endDate": "2018-08-13T00:00:00",
+      "priority": 8,
+      "managerId": 1,
+      "projectManager": {
+        "userId": 1,
+        "firstName": "Sabarinath",
+        "lastName": "Sivaprasad",
+        "employeeId": 259019,
+        "projectId": null,
+        "taskId": null,
+        "userProject": null,
+        "userTask": null,
+        "isDeleted": false
+      },
+      "status": "Suspended"
+    },
+    {
+      "projectId": 4,
+      "projectName": "Project 4",
+      "startDate": "2018-08-01T18:30:00",
+      "endDate": "2018-08-17T18:30:00",
+      "priority": 21,
+      "managerId": 1,
+      "projectManager": {
+        "userId": 1,
+        "firstName": "Sabarinath",
+        "lastName": "Sivaprasad",
+        "employeeId": 259019,
+        "projectId": null,
+        "taskId": null,
+        "userProject": null,
+        "userTask": null,
+        "isDeleted": false
+      },
+      "status": "Suspended"
+    },
+    {
+      "projectId": 5,
+      "projectName": "Project 5",
+      "startDate": null,
+      "endDate": null,
+      "priority": 16,
+      "managerId": 1,
+      "projectManager": {
+        "userId": 1,
+        "firstName": "Sabarinath",
+        "lastName": "Sivaprasad",
+        "employeeId": 259019,
+        "projectId": null,
+        "taskId": null,
+        "userProject": null,
+        "userTask": null,
+        "isDeleted": false
+      },
+      "status": "Active"
+    }
+  ]

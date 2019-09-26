@@ -1,0 +1,24 @@
+[
+    {
+      "userId": 1,
+      "firstName": "Sabarinath",
+      "lastName": "Sivaprasad",
+      "employeeId": 259019,
+      "projectId": null,
+      "taskId": null,
+      "userProject": null,
+      "userTask": null,
+      "isDeleted": false
+    },
+    {
+      "userId": 2,
+      "firstName": "Achinta",
+      "lastName": "Sarkar",
+      "employeeId": 123456,
+      "projectId": null,
+      "taskId": null,
+      "userProject": null,
+      "userTask": null,
+      "isDeleted": false
+    }
+  ]

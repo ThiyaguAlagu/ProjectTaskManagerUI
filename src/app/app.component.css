@@ -1,0 +1,19 @@
+.error {
+    font-size: 13px;
+    color: #c7254e;
+    background: #f9f2f4;
+    border-radius: 3px;
+    padding: 15px;
+    margin: -26px 0 15px;
+  }
+  .navbar-inverse {    
+    border-color: #1f89ce;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #f6f7f9;
+}
+.navbar-inverse .navbar-brand {
+  color: #f6f7f9;
+}
+
+
